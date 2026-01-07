@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lapor.in - Platform Pelaporan Warga Desa</title>
+    <meta
+      name="description"
+      content="Aplikasi Android untuk membantu masyarakat membuat laporan kepada petugas desa secara terstruktur, transparan, dan efisien."
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="container">
+        <div class="nav-brand">
+          <div class="logo">
+            <i class="fas fa-bullhorn"></i>
+          </div>
+          <span class="brand-text"
+            >Lapor<span class="highlight">.in</span></span
+          >
+        </div>
+        <div class="nav-menu">
+          <a href="#home" class="nav-link">Beranda</a>
+          <a href="#features" class="nav-link">Fitur</a>
+          <a href="#screenshots" class="nav-link">Tampilan</a>
+          <a href="#reviews" class="nav-link">Review</a>
+          <button id="loginBtn" class="btn-login">
+            <i class="fab fa-google"></i> Login
+          </button>
+        </div>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <div class="badge">
+              <i class="fas fa-check-circle"></i>
+              <span>Transparan & Efisien</span>
+            </div>
+            <h1 class="hero-title">
+              Platform <br />
+              <span class="gradient-text">Lapor.in</span>
+            </h1>
+            <p class="hero-description">
+              Aplikasi Android yang membantu masyarakat membuat laporan kepada
+              petugas desa secara terstruktur. Meningkatkan komunikasi dua arah
+              antara warga dan perangkat desa dengan sistem pelacakan laporan.
+            </p>
+            <div class="hero-buttons">
+              <button id="downloadBtn" class="btn-primary">
+                <i class="fas fa-download"></i>
+                Download APK v1.0.0
+              </button>
+              <a href="#reviews" class="btn-secondary">
+                <i class="fas fa-star"></i>
+                Lihat Rating
+              </a>
+            </div>
+            <p class="platform-info">
+              <i class="fab fa-android"></i>
+              Hanya Tersedia untuk Android
+            </p>
+          </div>
+          <div class="hero-image">
+            <div class="phone-mockup">
+              <div class="phone-screen">
+                <div class="app-preview">
+                  <div class="preview-header">
+                    <i class="fas fa-bullhorn"></i>
+                    <span>Lapor.in</span>
+                  </div>
+                  <div class="preview-content">
+                    <div class="preview-card">
+                      <i class="fas fa-file-alt"></i>
+                      <h4>Buat Laporan</h4>
+                    </div>
+                    <div class="preview-card">
+                      <i class="fas fa-tasks"></i>
+                      <h4>Lacak Status</h4>
+                    </div>
+                    <div class="preview-card rating-badge">
+                      <i class="fas fa-bell"></i>
+                      <span>Notifikasi Real-time</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="float-badge badge-1">
+              <i class="fas fa-shield-alt"></i>
+              <span>Laporan Terverifikasi</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-download"></i>
+            </div>
+            <div class="stat-info">
+              <h3 class="stat-number" id="totalDownloads">0</h3>
+              <p class="stat-label">Total Unduhan</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-star"></i>
+            </div>
+            <div class="stat-info">
+              <h3 class="stat-number" id="averageRating">0</h3>
+              <p class="stat-label">Penilaian Pengguna</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-file-alt"></i>
+            </div>
+            <div class="stat-info">
+              <h3 class="stat-number" id="totalReports">0</h3>
+              <p class="stat-label">Total Laporan</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="features">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Fitur Unggulan</h2>
+          <p class="section-subtitle">
+            Fitur lengkap untuk pelaporan dan pengelolaan aduan warga desa
+          </p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-file-alt"></i>
+            </div>
+            <h3 class="feature-title">Buat Laporan dengan Mudah</h3>
+            <p class="feature-description">
+              Warga dapat membuat laporan dengan foto, kategori, lokasi, dan
+              deskripsi secara terstruktur
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-tasks"></i>
+            </div>
+            <h3 class="feature-title">Pelacakan Status Laporan</h3>
+            <p class="feature-description">
+              Warga dapat melihat progres laporan: Diajukan → Diproses → Selesai
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-bell"></i>
+            </div>
+            <h3 class="feature-title">Notifikasi Otomatis</h3>
+            <p class="feature-description">
+              Notifikasi dikirim saat status laporan berubah dan ada update dari
+              petugas
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="screenshots" class="screenshots">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Tampilan Aplikasi</h2>
+          <p class="section-subtitle">
+            Klik gambar untuk melihat preview lebih jelas
+          </p>
+        </div>
+        <div class="screenshots-scroll">
+          <div class="screenshot-item">
+            <div class="screenshot-card">
+              <div class="screenshot-placeholder">
+                <i class="fas fa-home"></i>
+                <p>Dashboard Warga</p>
+              </div>
+            </div>
+          </div>
+          <div class="screenshot-item">
+            <div class="screenshot-card">
+              <div class="screenshot-placeholder">
+                <i class="fas fa-plus-circle"></i>
+                <p>Buat Laporan</p>
+              </div>
+            </div>
+          </div>
+          <div class="screenshot-item">
+            <div class="screenshot-card">
+              <div class="screenshot-placeholder">
+                <i class="fas fa-list-alt"></i>
+                <p>Daftar Laporan</p>
+              </div>
+            </div>
+          </div>
+          <div class="screenshot-item">
+            <div class="screenshot-card">
+              <div class="screenshot-placeholder">
+                <i class="fas fa-chart-line"></i>
+                <p>Status & Tracking</p>
+              </div>
+            </div>
+          </div>
+          <div class="screenshot-item">
+            <div class="screenshot-card">
+              <div class="screenshot-placeholder">
+                <i class="fas fa-user-shield"></i>
+                <p>Panel Admin</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="reviews" class="reviews">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Rating & Ulasan</h2>
+          <p class="section-subtitle">
+            Apa kata pengguna tentang aplikasi ini?
+          </p>
+        </div>
+
+        <div class="reviews-container">
+          <div class="overall-rating">
+            <div class="rating-score">
+              <h1 class="score" id="overallScore">0</h1>
+              <div class="stars" id="overallStars">
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+              </div>
+              <p class="review-count" id="reviewCount">0 reviews</p>
+            </div>
+            <div class="rating-bars">
+              <div class="rating-bar">
+                <span class="bar-label">5</span>
+                <div class="bar">
+                  <div class="bar-fill" id="bar-5" style="width: 0%"></div>
+                </div>
+                <span class="bar-count" id="count-5">0</span>
+              </div>
+              <div class="rating-bar">
+                <span class="bar-label">4</span>
+                <div class="bar">
+                  <div class="bar-fill" id="bar-4" style="width: 0%"></div>
+                </div>
+                <span class="bar-count" id="count-4">0</span>
+              </div>
+              <div class="rating-bar">
+                <span class="bar-label">3</span>
+                <div class="bar">
+                  <div class="bar-fill" id="bar-3" style="width: 0%"></div>
+                </div>
+                <span class="bar-count" id="count-3">0</span>
+              </div>
+              <div class="rating-bar">
+                <span class="bar-label">2</span>
+                <div class="bar">
+                  <div class="bar-fill" id="bar-2" style="width: 0%"></div>
+                </div>
+                <span class="bar-count" id="count-2">0</span>
+              </div>
+              <div class="rating-bar">
+                <span class="bar-label">1</span>
+                <div class="bar">
+                  <div class="bar-fill" id="bar-1" style="width: 0%"></div>
+                </div>
+                <span class="bar-count" id="count-1">0</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="reviews-list" id="reviewsList">
+            <div
+              class="no-reviews"
+              style="text-align: center; padding: 3rem; color: var(--gray)"
+            >
+              <i
+                class="fas fa-comments"
+                style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3"
+              ></i>
+              <p>Belum ada ulasan. Jadilah yang pertama memberikan review!</p>
+            </div>
+          </div>
+
+          <button class="btn-load-more" id="loadMoreBtn" style="display: none">
+            Lihat semua ulasan
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+
+        <div class="add-review-section" id="addReviewSection">
+          <div class="add-review-card">
+            <div class="review-icon">
+              <i class="fas fa-star"></i>
+            </div>
+            <h3>Berikan Rating Anda</h3>
+            <p>Login untuk memberikan rating dan ulasan tentang aplikasi ini</p>
+            <div class="review-form" id="reviewForm" style="display: none">
+              <div class="star-rating" id="starRating">
+                <i class="far fa-star" data-rating="1"></i>
+                <i class="far fa-star" data-rating="2"></i>
+                <i class="far fa-star" data-rating="3"></i>
+                <i class="far fa-star" data-rating="4"></i>
+                <i class="far fa-star" data-rating="5"></i>
+              </div>
+              <textarea
+                id="reviewText"
+                placeholder="Tulis ulasan Anda..."
+                rows="4"
+              ></textarea>
+              <button class="btn-submit" id="submitReview">Kirim Ulasan</button>
+            </div>
+            <button class="btn-google" id="loginGoogleBtn">
+              <i class="fab fa-google"></i>
+              Login dengan Google
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="download-section">
+      <div class="container">
+        <div class="download-card">
+          <h2>Siap Untuk Mencoba?</h2>
+          <p>Download sekarang dan rasakan kemudahan pelaporan warga</p>
+          <button id="downloadBtn2" class="btn-download">
+            <i class="fas fa-download"></i>
+            Download Sekarang
+          </button>
+          <p class="requirements">Mendukung Android 6.0+</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <div class="footer-brand">
+              <div class="logo">
+                <i class="fas fa-bullhorn"></i>
+              </div>
+              <span class="brand-text"
+                >Lapor<span class="highlight">.in</span></span
+              >
+            </div>
+            <p class="footer-description">
+              Aplikasi pelaporan warga desa untuk meningkatkan komunikasi antara
+              warga dan perangkat desa. Dikembangkan dengan Flutter & Firebase.
+            </p>
+          </div>
+          <div class="footer-section">
+            <h4>Tentang Project</h4>
+            <ul class="footer-links">
+              <li>Mata Kuliah: Rekayasa Interaksi</li>
+              <li>Universitas: Universitas Muhammadiyah Malang</li>
+              <li>Tahun: 2025/2026</li>
+              <li>
+                <a href="#" target="_blank">
+                  <i class="fab fa-github"></i> GitHub Repository
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Tim Pengembang</h4>
+            <ul class="footer-links">
+              <li>M. Adriyan Maulana (202210370311005)</li>
+              <li>M. Rafly Achiyar (202210370311032)</li>
+              <li>Satria Kalkautsar Hasmen (202210370311016)</li>
+              <li>Rachmad Mauluddin (202210370311043)</li>
+              <li>Maulana Ziddan Abdillah (202210370311033)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; 2026 Lapor.in. Tugas Rekayasa Interaksi - Universitas
+            Muhammadiyah Malang
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <div class="toast" id="toast">
+      <i class="fas fa-check-circle"></i>
+      <span id="toastMessage">Download dimulai...</span>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+    <script src="firebase-config.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
