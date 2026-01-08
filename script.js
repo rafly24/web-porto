@@ -218,6 +218,8 @@ function handleUserLogin(user) {
   if (addReviewSection) {
     addReviewSection.style.display = "block";
   }
+
+  checkExistingReview(user.email);
   if (reviewForm) {
     reviewForm.style.display = "block";
   }
@@ -255,6 +257,164 @@ async function handleLogout() {
   }
 }
 
+async function checkExistingReview(userEmail) {
+  try {
+    const reviewForm = document.getElementById("reviewForm");
+    const loginGoogleBtn = document.getElementById("loginGoogleBtn");
+
+    if (!reviewForm) return;
+
+    const snapshot = await firebase
+      .firestore()
+      .collection("reviews")
+      .where("userEmail", "==", userEmail)
+      .get();
+
+    if (!snapshot.empty) {
+      const reviewDoc = snapshot.docs[0];
+      const reviewData = reviewDoc.data();
+      const reviewId = reviewDoc.id;
+
+      selectedRating = reviewData.rating;
+      const stars = document.querySelectorAll("#starRating i");
+      updateStarDisplay(stars, selectedRating);
+      document.getElementById("reviewText").value = reviewData.text;
+
+      reviewForm.innerHTML = `
+        <div style="background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%); padding: 1.5rem; border-radius: 12px; color: white; margin-bottom: 1rem;">
+          <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
+            <img src="${reviewData.userPhoto}" alt="${reviewData.userName}" 
+                 style="width: 40px; height: 40px; border-radius: 50%;">
+            <div>
+              <h3 style="margin: 0; font-size: 1.1rem;">${
+                reviewData.userName
+              }</h3>
+              <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">Berikan rating Anda</p>
+            </div>
+          </div>
+        </div>
+        
+        <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 2px solid #e5e7eb;">
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #1f2937;">Rating Anda</label>
+            <div id="starRating" style="font-size: 2rem; color: #fbbf24; cursor: pointer;">
+              ${[1, 2, 3, 4, 5]
+                .map(
+                  (i) =>
+                    `<i class="fa${
+                      i <= reviewData.rating ? "s" : "r"
+                    } fa-star" data-rating="${i}"></i>`
+                )
+                .join("")}
+            </div>
+            <p style="margin-top: 0.5rem; color: #6b7280; font-size: 0.9rem;">Sangat Bagus 😊</p>
+          </div>
+          
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #1f2937;">Komentar</label>
+            <textarea id="reviewText" 
+                      style="width: 100%; padding: 0.75rem; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; min-height: 100px; resize: vertical;"
+                      placeholder="Bagikan pengalaman Anda menggunakan aplikasi Lapor.in...">${
+                        reviewData.text
+                      }</textarea>
+          </div>
+          
+          <div style="display: flex; gap: 0.75rem;">
+            <button onclick="updateReview('${reviewId}')" 
+                    style="flex: 1; background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+              <i class="fas fa-sync-alt"></i> Update
+            </button>
+            <button onclick="deleteReview('${reviewId}')" 
+                    style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+              <i class="fas fa-trash"></i> Hapus
+            </button>
+          </div>
+        </div>
+      `;
+
+      const newStarRating = document.getElementById("starRating");
+      if (newStarRating) {
+        const newStars = newStarRating.querySelectorAll("i");
+        newStars.forEach((star) => {
+          star.addEventListener("click", function () {
+            selectedRating = parseInt(this.getAttribute("data-rating"));
+            updateStarDisplay(newStars, selectedRating);
+          });
+        });
+      }
+    } else {
+      reviewForm.style.display = "block";
+      if (loginGoogleBtn) {
+        loginGoogleBtn.style.display = "none";
+      }
+    }
+  } catch (error) {
+    console.error("Error checking existing review:", error);
+  }
+}
+
+async function updateReview(reviewId) {
+  if (!currentUser) {
+    showToast("Silakan login terlebih dahulu");
+    return;
+  }
+
+  if (selectedRating === 0) {
+    showToast("Silakan pilih rating");
+    return;
+  }
+
+  const reviewText = document.getElementById("reviewText").value.trim();
+  if (!reviewText) {
+    showToast("Silakan tulis ulasan Anda");
+    return;
+  }
+
+  try {
+    await firebase.firestore().collection("reviews").doc(reviewId).update({
+      rating: selectedRating,
+      text: reviewText,
+      updatedAt: new Date().toISOString(),
+    });
+
+    showToast("Ulasan berhasil diperbarui!");
+    loadReviews();
+  } catch (error) {
+    console.error("Error updating review:", error);
+    showToast("Gagal memperbarui ulasan. Silakan coba lagi.");
+  }
+}
+
+async function deleteReview(reviewId) {
+  if (!currentUser) {
+    showToast("Silakan login terlebih dahulu");
+    return;
+  }
+
+  if (!confirm("Apakah Anda yakin ingin menghapus ulasan ini?")) {
+    return;
+  }
+
+  try {
+    await firebase.firestore().collection("reviews").doc(reviewId).delete();
+
+    showToast("Ulasan berhasil dihapus!");
+
+    document.getElementById("reviewText").value = "";
+    selectedRating = 0;
+    const stars = document.querySelectorAll("#starRating i");
+    if (stars.length > 0) {
+      updateStarDisplay(stars, 0);
+    }
+
+    loadReviews();
+    location.reload();
+  } catch (error) {
+    console.error("Error deleting review:", error);
+    showToast("Gagal menghapus ulasan. Silakan coba lagi.");
+  }
+}
+
 async function submitReview() {
   if (!currentUser) {
     showToast("Silakan login terlebih dahulu");
@@ -273,6 +433,19 @@ async function submitReview() {
   }
 
   try {
+    const existingReview = await firebase
+      .firestore()
+      .collection("reviews")
+      .where("userEmail", "==", currentUser.email)
+      .get();
+
+    if (!existingReview.empty) {
+      showToast(
+        "Anda sudah memberikan ulasan. Gunakan tombol Update untuk mengubahnya."
+      );
+      return;
+    }
+
     const review = {
       userId: currentUser.uid,
       userName: currentUser.displayName,
@@ -294,6 +467,7 @@ async function submitReview() {
     updateStarDisplay(stars, 0);
 
     loadReviews();
+    checkExistingReview(currentUser.email);
   } catch (error) {
     console.error("Error submitting review:", error);
     showToast("Gagal mengirim ulasan. Silakan coba lagi.");
