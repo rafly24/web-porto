@@ -283,6 +283,14 @@ body {
   border-radius: 40px;
   padding: 15px;
   box-shadow: var(--shadow-xl);
+  overflow: hidden;
+}
+
+.phone-screenshot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 30px;
 }
 
 .phone-screen {
@@ -509,11 +517,20 @@ body {
   overflow: hidden;
   transition: all 0.3s ease;
   cursor: pointer;
+  box-shadow: var(--shadow-sm);
 }
 
 .screenshot-card:hover {
   transform: scale(1.05);
   box-shadow: var(--shadow-lg);
+}
+
+.screenshot-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 9/16;
+  object-fit: cover;
 }
 
 .screenshot-placeholder {

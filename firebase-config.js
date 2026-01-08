@@ -1,13 +1,11 @@
-
-
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY_HERE",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID",
-  measurementId: "YOUR_MEASUREMENT_ID",
+  apiKey: "AIzaSyDIVIaz2lrgEPbzG_CejpNdCgXHQ66mzig",
+  authDomain: "lapor-in-22a8a.firebaseapp.com",
+  projectId: "lapor-in-22a8a",
+  storageBucket: "lapor-in-22a8a.firebasestorage.app",
+  messagingSenderId: "113874778820",
+  appId: "1:113874778820:web:77c8c8a7be34f396fc6791",
+  measurementId: "G-37CVH7P1HV",
 };
 
 try {

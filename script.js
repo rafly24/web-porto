@@ -83,6 +83,16 @@ async function handleDownload() {
 
     showToast("Download dimulai... Terima kasih!");
 
+    const apkUrl =
+      "https://github.com/rafly24/web-porto/releases/download/lapor-in/lapor-in.apk";
+
+    const link = document.createElement("a");
+    link.href = apkUrl;
+    link.download = "lapor-in.apk";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
     console.log("Download initiated");
   } catch (error) {
     console.error("Error during download:", error);
