@@ -145,18 +145,56 @@
         border-radius: 12px;
         text-align: center;
         box-shadow: var(--shadow-sm);
+        transition: all 0.3s ease;
+      }
+
+      .stat-box:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-md);
+      }
+
+      .stat-box .stat-icon {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto var(--spacing-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 1.5rem;
+      }
+
+      .stat-icon.download {
+        background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+        color: #0284c7;
+      }
+
+      .stat-icon.rating {
+        background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        color: #f59e0b;
+      }
+
+      .stat-icon.reviews {
+        background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+        color: #059669;
+      }
+
+      .stat-icon.five-star {
+        background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+        color: #ec4899;
       }
 
       .stat-box .stat-value {
         font-size: 2rem;
         font-weight: 700;
-        color: var(--primary);
+        color: var(--dark);
         margin-bottom: var(--spacing-xs);
       }
 
       .stat-box .stat-label {
         color: var(--gray);
         font-size: 0.9rem;
+        font-weight: 500;
       }
 
       .loading-spinner {
@@ -256,14 +294,30 @@
 
         <div class="stats-summary">
           <div class="stat-box">
-            <div class="stat-value" id="totalReviewsCount">0</div>
-            <div class="stat-label">Total Ulasan</div>
+            <div class="stat-icon download">
+              <i class="fas fa-download"></i>
+            </div>
+            <div class="stat-value" id="totalDownloadsCount">0</div>
+            <div class="stat-label">Total Download</div>
           </div>
           <div class="stat-box">
+            <div class="stat-icon rating">
+              <i class="fas fa-star"></i>
+            </div>
             <div class="stat-value" id="averageRatingValue">0</div>
             <div class="stat-label">Rating Rata-rata</div>
           </div>
           <div class="stat-box">
+            <div class="stat-icon reviews">
+              <i class="fas fa-comments"></i>
+            </div>
+            <div class="stat-value" id="totalReviewsCount">0</div>
+            <div class="stat-label">Total Ulasan</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-icon five-star">
+              <i class="fas fa-medal"></i>
+            </div>
             <div class="stat-value" id="fiveStarCount">0</div>
             <div class="stat-label">Ulasan Bintang 5</div>
           </div>

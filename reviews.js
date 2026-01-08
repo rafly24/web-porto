@@ -197,6 +197,25 @@ function updateStats(reviews) {
   document.getElementById("totalReviewsCount").textContent = totalCount;
   document.getElementById("averageRatingValue").textContent = avgRating;
   document.getElementById("fiveStarCount").textContent = fiveStarCount;
+
+  loadDownloadStats();
+}
+
+async function loadDownloadStats() {
+  try {
+    const statsRef = firebase.firestore().collection("stats").doc("downloads");
+    const doc = await statsRef.get();
+
+    if (doc.exists) {
+      const count = doc.data().count || 0;
+      document.getElementById("totalDownloadsCount").textContent = count;
+    } else {
+      document.getElementById("totalDownloadsCount").textContent = "0";
+    }
+  } catch (error) {
+    console.error("Error loading download stats:", error);
+    document.getElementById("totalDownloadsCount").textContent = "0";
+  }
 }
 
 function setupFilters() {
