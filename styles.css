@@ -716,6 +716,7 @@ body {
   border: 2px solid var(--primary);
   border-radius: 12px;
   font-weight: 600;
+  text-decoration: none;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -723,6 +724,8 @@ body {
 .btn-load-more:hover {
   background: var(--primary);
   color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .add-review-section {

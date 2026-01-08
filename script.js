@@ -333,7 +333,7 @@ async function loadReviews() {
     const totalCount = await firebase.firestore().collection("reviews").get();
     const loadMoreBtn = document.getElementById("loadMoreBtn");
     if (loadMoreBtn) {
-      loadMoreBtn.style.display = totalCount.size > 4 ? "flex" : "none";
+      loadMoreBtn.style.display = totalCount.size > 0 ? "flex" : "none";
     }
 
     updateOverallRating();
@@ -494,30 +494,4 @@ function showToast(message) {
       toast.classList.remove("show");
     }, 3000);
   }
-}
-
-const loadMoreBtn = document.getElementById("loadMoreBtn");
-if (loadMoreBtn) {
-  loadMoreBtn.addEventListener("click", async function () {
-    try {
-      const reviewsList = document.getElementById("reviewsList");
-      const snapshot = await firebase
-        .firestore()
-        .collection("reviews")
-        .orderBy("timestamp", "desc")
-        .get();
-
-      reviewsList.innerHTML = "";
-
-      snapshot.forEach((doc) => {
-        const review = doc.data();
-        const reviewCard = createReviewCard(review);
-        reviewsList.appendChild(reviewCard);
-      });
-
-      this.style.display = "none";
-    } catch (error) {
-      console.error("Error loading more reviews:", error);
-    }
-  });
 }
