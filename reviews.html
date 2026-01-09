@@ -14,110 +14,234 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
     <style>
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      @keyframes gradient-shift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @keyframes pulse-glow {
+        0%,
+        100% {
+          box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        50% {
+          box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+        }
+      }
+
+      @keyframes slide-in-up {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
       .reviews-page {
         min-height: 100vh;
         padding-top: 100px;
         padding-bottom: var(--spacing-2xl);
-        background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+        background: linear-gradient(
+          -45deg,
+          #667eea 0%,
+          #764ba2 25%,
+          #f093fb 50%,
+          #4facfe 75%,
+          #00f2fe 100%
+        );
+        background-size: 400% 400%;
+        animation: gradient-shift 15s ease infinite;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .reviews-page::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at 20% 50%,
+            rgba(255, 255, 255, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(255, 255, 255, 0.1) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
       }
 
       .page-header {
         text-align: center;
         margin-bottom: var(--spacing-2xl);
+        position: relative;
+        z-index: 1;
+        animation: slide-in-up 0.6s ease-out;
       }
 
       .page-header h1 {
-        font-size: 2.5rem;
-        color: var(--dark);
+        font-size: 3.5rem;
+        background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
         margin-bottom: var(--spacing-sm);
+        font-weight: 800;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        letter-spacing: -1px;
       }
 
       .page-header p {
-        font-size: 1.1rem;
-        color: var(--gray);
+        font-size: 1.3rem;
+        color: rgba(255, 255, 255, 0.95);
+        font-weight: 500;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
       }
 
       .back-link {
         display: inline-flex;
         align-items: center;
         gap: var(--spacing-xs);
-        color: var(--primary);
+        color: #ffffff;
         text-decoration: none;
-        font-weight: 600;
+        font-weight: 700;
         margin-bottom: var(--spacing-lg);
-        transition: all 0.3s ease;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        padding: 0.75rem 1.5rem;
+        border-radius: 50px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        position: relative;
+        z-index: 1;
       }
 
       .back-link:hover {
         gap: var(--spacing-sm);
+        background: rgba(255, 255, 255, 0.25);
+        transform: translateX(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
       }
 
       .reviews-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-        gap: var(--spacing-lg);
+        grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+        gap: 2rem;
         margin-top: var(--spacing-xl);
+        position: relative;
+        z-index: 1;
       }
 
       .filter-section {
-        background: var(--white);
-        padding: var(--spacing-lg);
-        border-radius: 16px;
-        box-shadow: var(--shadow-sm);
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        padding: 2rem;
+        border-radius: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+          inset 0 1px 0 rgba(255, 255, 255, 0.5);
         margin-bottom: var(--spacing-xl);
+        position: relative;
+        z-index: 1;
+        animation: slide-in-up 0.6s ease-out 0.2s both;
       }
 
       .filter-row {
         display: flex;
-        gap: var(--spacing-md);
+        gap: 1.5rem;
         flex-wrap: wrap;
-        align-items: center;
+        align-items: flex-end;
       }
 
       .filter-group {
         flex: 1;
-        min-width: 200px;
+        min-width: 220px;
       }
 
       .filter-group label {
         display: block;
-        font-weight: 600;
-        margin-bottom: var(--spacing-xs);
-        color: var(--dark);
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+        color: #ffffff;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
       }
 
       .filter-select {
         width: 100%;
-        padding: 0.75rem 1rem;
-        border: 2px solid var(--gray-light);
-        border-radius: 8px;
+        padding: 1rem 1.25rem;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 16px;
         font-size: 1rem;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        background: rgba(255, 255, 255, 0.95);
+        font-weight: 600;
+        color: #334155;
       }
 
       .filter-select:focus {
         outline: none;
-        border-color: var(--primary);
+        border-color: rgba(255, 255, 255, 0.8);
+        background: #ffffff;
+        box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
       }
 
       .search-box {
         flex: 2;
-        min-width: 300px;
+        min-width: 320px;
       }
 
       .search-input {
         width: 100%;
-        padding: 0.75rem 1rem 0.75rem 3rem;
-        border: 2px solid var(--gray-light);
-        border-radius: 8px;
+        padding: 1rem 1.25rem 1rem 3.5rem;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 16px;
         font-size: 1rem;
-        transition: all 0.3s ease;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        background: rgba(255, 255, 255, 0.95);
+        font-weight: 500;
+        color: #334155;
       }
 
       .search-input:focus {
         outline: none;
-        border-color: var(--primary);
+        border-color: rgba(255, 255, 255, 0.8);
+        background: #ffffff;
+        box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .search-input::placeholder {
+        color: #94a3b8;
       }
 
       .search-wrapper {
@@ -126,99 +250,185 @@
 
       .search-icon {
         position: absolute;
-        left: 1rem;
+        left: 1.25rem;
         top: 50%;
         transform: translateY(-50%);
-        color: var(--gray);
+        color: #64748b;
+        font-size: 1.1rem;
       }
 
       .stats-summary {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: var(--spacing-md);
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.5rem;
         margin-bottom: var(--spacing-xl);
+        position: relative;
+        z-index: 1;
       }
 
       .stat-box {
-        background: var(--white);
-        padding: var(--spacing-lg);
-        border-radius: 12px;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.25) 0%,
+          rgba(255, 255, 255, 0.1) 100%
+        );
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        padding: 2rem 1.5rem;
+        border-radius: 24px;
         text-align: center;
-        box-shadow: var(--shadow-sm);
-        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+          inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        animation: slide-in-up 0.6s ease-out calc(0.1s * var(--index)) both;
+      }
+
+      .stat-box::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        transition: left 0.6s;
+      }
+
+      .stat-box:hover::before {
+        left: 100%;
+      }
+
+      .stat-box:nth-child(1) {
+        --index: 1;
+      }
+      .stat-box:nth-child(2) {
+        --index: 2;
+      }
+      .stat-box:nth-child(3) {
+        --index: 3;
+      }
+      .stat-box:nth-child(4) {
+        --index: 4;
       }
 
       .stat-box:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--shadow-md);
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        border-color: rgba(255, 255, 255, 0.5);
       }
 
       .stat-box .stat-icon {
-        width: 60px !important;
-        height: 60px !important;
-        min-width: 60px !important;
-        min-height: 60px !important;
-        max-width: 60px !important;
-        max-height: 60px !important;
-        margin: 0 auto var(--spacing-sm) !important;
+        width: 80px !important;
+        height: 80px !important;
+        min-width: 80px !important;
+        min-height: 80px !important;
+        max-width: 80px !important;
+        max-height: 80px !important;
+        margin: 0 auto 1.25rem !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
         border-radius: 50% !important;
-        font-size: 1.5rem !important;
+        font-size: 2rem !important;
         flex-shrink: 0 !important;
         flex-grow: 0 !important;
-        flex-basis: 60px !important;
+        flex-basis: 80px !important;
         padding: 0 !important;
         box-sizing: border-box !important;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .stat-box:hover .stat-icon {
+        transform: rotateY(360deg) scale(1.1);
       }
 
       .stat-icon.download {
-        background: #e0f2fe !important;
-        color: #0284c7 !important;
+        background: linear-gradient(
+          135deg,
+          #3b82f6 0%,
+          #1d4ed8 100%
+        ) !important;
+        color: #ffffff !important;
       }
 
       .stat-icon.rating {
-        background: #fef3c7 !important;
-        color: #f59e0b !important;
+        background: linear-gradient(
+          135deg,
+          #f59e0b 0%,
+          #d97706 100%
+        ) !important;
+        color: #ffffff !important;
       }
 
       .stat-icon.reviews {
-        background: #d1fae5 !important;
-        color: #059669 !important;
+        background: linear-gradient(
+          135deg,
+          #10b981 0%,
+          #059669 100%
+        ) !important;
+        color: #ffffff !important;
       }
 
       .stat-icon.five-star {
-        background: #fce7f3 !important;
-        color: #ec4899 !important;
+        background: linear-gradient(
+          135deg,
+          #ec4899 0%,
+          #db2777 100%
+        ) !important;
+        color: #ffffff !important;
       }
 
       .stat-box .stat-value {
-        font-size: 2rem;
-        font-weight: 700;
-        color: var(--dark);
-        margin-bottom: var(--spacing-xs);
+        font-size: 2.75rem;
+        font-weight: 800;
+        color: #ffffff;
+        margin-bottom: 0.5rem;
+        text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        letter-spacing: -1px;
       }
 
       .stat-box .stat-label {
-        color: var(--gray);
-        font-size: 0.9rem;
-        font-weight: 500;
+        color: rgba(255, 255, 255, 0.95);
+        font-size: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
       }
 
       .loading-spinner {
         text-align: center;
         padding: var(--spacing-2xl);
+        position: relative;
+        z-index: 1;
       }
 
       .spinner {
-        border: 4px solid var(--gray-light);
-        border-top: 4px solid var(--primary);
+        border: 6px solid rgba(255, 255, 255, 0.3);
+        border-top: 6px solid #ffffff;
         border-radius: 50%;
-        width: 50px;
-        height: 50px;
+        width: 70px;
+        height: 70px;
         animation: spin 1s linear infinite;
-        margin: 0 auto;
+        margin: 0 auto 1rem;
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+      }
+
+      .loading-spinner p {
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 1.1rem;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
       }
 
       @keyframes spin {
@@ -233,18 +443,172 @@
       .no-reviews-message {
         text-align: center;
         padding: var(--spacing-2xl);
-        color: var(--gray);
+        color: #ffffff;
+        position: relative;
+        z-index: 1;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(20px);
+        border-radius: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
       }
 
       .no-reviews-message i {
-        font-size: 3rem;
+        font-size: 4rem;
         margin-bottom: var(--spacing-md);
-        opacity: 0.3;
+        opacity: 0.8;
+      }
+
+      .no-reviews-message p {
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+
+      /* Review Card Styles - Modern Glass Design */
+      .review-card {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.25) 0%,
+          rgba(255, 255, 255, 0.1) 100%
+        );
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border-radius: 24px;
+        padding: 2rem;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+          inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        animation: slide-in-up 0.6s ease-out both;
+      }
+
+      .review-card::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 70%
+        );
+        opacity: 0;
+        transition: opacity 0.4s;
+      }
+
+      .review-card:hover::before {
+        opacity: 1;
+      }
+
+      .review-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        border-color: rgba(255, 255, 255, 0.5);
+      }
+
+      .review-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1.25rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .review-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 1.3rem;
+        color: #ffffff;
+        flex-shrink: 0;
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        border: 3px solid rgba(255, 255, 255, 0.5);
+        transition: all 0.3s ease;
+      }
+
+      .review-card:hover .review-avatar {
+        transform: rotate(360deg) scale(1.1);
+        box-shadow: 0 12px 30px rgba(102, 126, 234, 0.6);
+      }
+
+      .review-info {
+        flex: 1;
+      }
+
+      .review-info h4 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 0.5rem;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .review-rating {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .review-stars {
+        display: flex;
+        gap: 0.25rem;
+      }
+
+      .review-stars i {
+        color: #fbbf24;
+        font-size: 1rem;
+        filter: drop-shadow(0 2px 4px rgba(251, 191, 36, 0.5));
+        transition: all 0.2s ease;
+      }
+
+      .review-card:hover .review-stars i {
+        transform: scale(1.2);
+      }
+
+      .review-badge {
+        background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+        color: #ffffff;
+        padding: 0.35rem 0.75rem;
+        border-radius: 12px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
+      }
+
+      .review-time {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 600;
+        background: rgba(255, 255, 255, 0.15);
+        padding: 0.5rem 1rem;
+        border-radius: 12px;
+        white-space: nowrap;
+      }
+
+      .review-text {
+        color: rgba(255, 255, 255, 0.95);
+        line-height: 1.7;
+        font-size: 1.05rem;
+        margin: 0;
+        position: relative;
+        z-index: 1;
+        font-weight: 500;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
       }
 
       @media (max-width: 768px) {
         .page-header h1 {
-          font-size: 2rem;
+          font-size: 2.5rem;
         }
 
         .reviews-grid {
@@ -258,6 +622,20 @@
         .filter-group,
         .search-box {
           width: 100%;
+        }
+
+        .stat-box .stat-value {
+          font-size: 2.25rem;
+        }
+
+        .review-card {
+          padding: 1.5rem;
+        }
+
+        .review-avatar {
+          width: 50px;
+          height: 50px;
+          font-size: 1.1rem;
         }
       }
     </style>
