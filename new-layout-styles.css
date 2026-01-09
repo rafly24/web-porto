@@ -304,19 +304,19 @@
 
 .card-1 {
   top: 10%;
-  left: -10%;
+  left: 5%;
   animation-delay: 0s;
 }
 
 .card-2 {
   top: 50%;
-  right: -15%;
+  right: 5%;
   animation-delay: 1s;
 }
 
 .card-3 {
   bottom: 15%;
-  left: 0;
+  left: 5%;
   animation-delay: 2s;
 }
 
@@ -1052,5 +1052,21 @@
 
   .download-left h2 {
     font-size: 2rem;
+  }
+
+  .hero-split {
+    overflow: hidden;
+  }
+
+  .phone-showcase {
+    overflow: hidden;
+  }
+
+  .floating-card {
+    display: none;
+  }
+
+  .container {
+    overflow-x: hidden;
   }
 }

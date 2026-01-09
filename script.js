@@ -319,13 +319,13 @@ async function checkExistingReview(userEmail) {
                       }</textarea>
           </div>
           
-          <div style="display: flex; gap: 0.75rem;">
+          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
             <button onclick="updateReview('${reviewId}')" 
-                    style="flex: 1; background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                    style="flex: 1; min-width: 140px; background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
               <i class="fas fa-sync-alt"></i> Update
             </button>
             <button onclick="deleteReview('${reviewId}')" 
-                    style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                    style="flex: 1; min-width: 140px; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
               <i class="fas fa-trash"></i> Hapus
             </button>
           </div>
